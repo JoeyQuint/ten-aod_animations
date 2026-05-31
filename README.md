@@ -5,7 +5,7 @@ A **Tomb Raider: The Angel Of Darkness** based animation set for **[Tomb Engine]
 Preview (**Jul 28, 2019**):
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=O-3Q1sZRti4" target="_blank">
-	<img src="https://img.youtube.com/vi/O-3Q1sZRti4/0.jpg"alt="Video preview of the animations from Jul 28, 2019" width="240" height="180" border="10" />
+	<img src="https://img.youtube.com/vi/O-3Q1sZRti4/0.jpg" alt="Video preview of the animations from Jul 28, 2019" width="240" height="180" border="10" />
 </a>
 
 Note that this video was made using the **[TRNG version](https://github.com/Joey79100/trle-aod_animations)**.
@@ -17,7 +17,7 @@ Note that this video was made using the **[TRNG version](https://github.com/Joey
   - [1.2. Target engine/editor](#12-target-engineeditor)
 - [2. Installation](#2-installation)
   - [2.1. Importing the animations](#21-importing-the-animations)
-  - [2.2. Fixing ladders snapping](#22-fixing-ladders-snapping)
+  - [2.2. Fixes & additional features](#22-fixes--additional-features)
   - [2.3. Interactible objects with custom animations](#23-interactible-objects-with-custom-animations)
   - [2.4. Sounds](#24-sounds)
     - [Basics](#basics)
@@ -35,7 +35,7 @@ You can:
 
 
 ## 1.2. Target engine/editor
-The project is currently developped using **TombEngine**.
+The project is currently developped using **TombEngine**.  
 The original **[TRNG version](https://github.com/Joey79100/ten-aod_animations)** will remain available, but I have no plan to continue working on them, as it would double the work for me.
 
 You can build levels for [Tomb Engine (TEN)](https://tombengine.com/) using [Tomb Editor (TE)](https://github.com/TombEngine/TombEditorReleases/releases).
@@ -60,14 +60,27 @@ You only need to **load this WAD into your project**, and update it from time to
 
 If you want to use another outfit, simply put it above `Lara.wad2` in your WAD list (Level Settings > *Object Files*).
 
-## 2.2. Fixing ladders snapping
-The engine implementation of ladders in TR2-5 includes hardcoded frame numbers. Changing the speed of ladder animations results in Lara snapping when she stops moving up or down.
-**Bagas** has written a script which fixes part of this snapping:
-1. Download [Engine/Scripts/Addons/**AOD_Animations.lua**](Engine/Scripts/Addons/AOD_Animations.lua) and put it in the same location in your game folder.
+## 2.2. Fixes & additional features
+A Lua file is provided to **fix** issues and implement **additional features**.
+1. Grab [Engine/Scripts/Addons/**AOD_Animations.lua**](Engine/Scripts/Addons/AOD_Animations.lua) and put it in the same location in your game folder.
 2. Open your `Engine/Scripts/Levels/{your-level-name}.lua` file, and add the following line at the very top of the file:
    ```lua
    require("Addons.AOD_Animations")
    ```
+
+### Included fixes
+### Ladders snapping
+Fixes Lara snapping up and down after stopping on ladders.  
+> The engine implementation of ladders in TR2-5 includes hardcoded frame numbers. Changing the speed of ladder animations results in Lara snapping when she stops moving up or down.
+
+_Original implementation by **Bagas**._
+
+### Included additional features
+#### Last chance grab
+When running off a ledge, holding Action will make Lara turn around and grab the ledge.
+
+_Original implementation by **shabaobab**._
+_Animations extracted by **DarkLegendAOD**._
 
 ## 2.3. Interactible objects with custom animations
 The animations of some interactible objects have been edited to fit Lara's new animations.
@@ -121,6 +134,8 @@ You can use the `Footsteps.xml` catalog, which is setup with this approach in mi
   - [Daledrau](https://twitter.com/daledrau): Title screen render
   - [Mrshina](https://www.trsearch.org/member/3507): Lara's outfit
   - [The Lost Dominion team](https://www.tombraiderforums.com/showthread.php?t=196197) ([members](https://www.tombraiderforums.com/showthread.php?t=179784)) & [The Lost Dominion Revival team](https://www.tombraiderforums.com/showthread.php?t=216488): Specific AOD items (medipacks, batteries, chocolate bar, power-up, etc)
+  - DarkLegendAOD: AOD animations extracted from the Tomb Raider Remastered games
+  - shabaobab: Original implementation for the last chance grab feature
   - [Tomb Engine team](https://github.com/MontyTRC89/TombEngine): TombEngine
   - [Tomb Editor team](https://github.com/MontyTRC89/Tomb-Editor): Tomb Editor and its tools
   - Core Design & Eidos Interactive: Tomb Raider
