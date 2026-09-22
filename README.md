@@ -18,6 +18,9 @@ Note that this video was made using the **[TRNG version](https://github.com/Joey
 - [2. Installation](#2-installation)
   - [2.1. Importing the animations](#21-importing-the-animations)
   - [2.2. Fixes & additional features](#22-fixes--additional-features)
+    - [Fix: Ladders snapping](#fix-ladder-snapping)
+    - [Feature: Last chance grab](#feature-last-chance-grab)
+    - [Feature: Safe drop](#feature-safe-drop)
   - [2.3. Interactible objects with custom animations](#23-interactible-objects-with-custom-animations)
   - [2.4. Sounds](#24-sounds)
     - [Basics](#basics)
@@ -68,19 +71,30 @@ A Lua file is provided to **fix** issues and implement **additional features**.
    require("Addons.AOD_Animations")
    ```
 
-### Included fixes
-### Ladders snapping
+### Fix: Ladders snapping
 Fixes Lara snapping up and down after stopping on ladders.  
 > The engine implementation of ladders in TR2-5 includes hardcoded frame numbers. Changing the speed of ladder animations results in Lara snapping when she stops moving up or down.
 
 _Original implementation by **Bagas**._
 
-### Included additional features
-#### Last chance grab
+### Feature: Last chance grab
 When running off a ledge, holding Action will make Lara turn around and grab the ledge.
 
 _Original implementation by **shabaobab**._
 _Animations extracted by **DarkLegendAOD**._
+
+### Feature: Safe drop
+When near a ledge at Lara's feet, press Action to make her safely hang from it.
+Works when standing (front & back) + crouching.
+
+> **Known issues**:
+> - Safe drop triggers if you **save your game** using Action
+> - Safe drop triggers **even if Lara is able to do some interaction** (eg. the player wants to push/pull a block)
+> - If Lara is **standing on a pushable block**, and in front of her is another pushable block (itself sitting on a pushable block), she might trigger the safe drop animation. Happens when facing North at least in the demo level.
+> 
+> → _If want to disable it_ (keeping the other features of this file):
+> 1. Open the [Engine/Scripts/Addons/**AOD_Animations.lua**](Engine/Scripts/Addons/AOD_Animations.lua) file
+> 2. Comment the very last line of the file (ie. add two dashes and a space at the very beginning of the line).
 
 ## 2.3. Interactible objects with custom animations
 The animations of some interactible objects have been edited to fit Lara's new animations.
@@ -135,9 +149,9 @@ You can use the `Footsteps.xml` catalog, which is setup with this approach in mi
   - [Mrshina](https://www.trsearch.org/member/3507): Lara's outfit
   - [The Lost Dominion team](https://www.tombraiderforums.com/showthread.php?t=196197) ([members](https://www.tombraiderforums.com/showthread.php?t=179784)) & [The Lost Dominion Revival team](https://www.tombraiderforums.com/showthread.php?t=216488): Specific AOD items (medipacks, batteries, chocolate bar, power-up, etc)
   - DarkLegendAOD: AOD animations extracted from the Tomb Raider Remastered games
-  - shabaobab: Original implementation for the last chance grab feature
-  - [Tomb Engine team](https://github.com/MontyTRC89/TombEngine): TombEngine
-  - [Tomb Editor team](https://github.com/MontyTRC89/Tomb-Editor): Tomb Editor and its tools
+  - [LoreRaider](https://www.trsearch.org/member/3718), [shabaobab](https://www.trsearch.org/member/3956), [vandersweater](https://www.trsearch.org/member/3820): Original implementation for the [last chance grab](https://www.trsearch.org/item/6228) feature
+  - [Tomb Engine team](https://github.com/TombEngine/TombEngine): TombEngine
+  - [Tomb Editor team](https://github.com/TombEngine/Tomb-Editor): Tomb Editor and its tools
   - Core Design & Eidos Interactive: Tomb Raider
 
 As the [The Dark Renaissance](https://github.com/Castigavi/the-dark-renaissance) project (and before that, The Lost Dominion) was originally a private project in which I was only a member, I did not keep a credits list. I am trying to correct this, but I may be missing people here. Feel free to let me know if you know more details.
